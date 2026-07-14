@@ -1,0 +1,284 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Find and Replace Text Tool - Regex Supported"
+  description="Search and replace words or patterns inside blocks of text. Supports exact matches, case-insensitive operations, and regular expressions."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Find and Replace Text
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Formatting logs, changing variables in template text, or revising a word throughout an entire document can be exhausting. Our free online find and replace tool allows you to search and swap text patterns instantly. Switch on case-sensitivity or regular expression (regex) patterns to perform complex search-and-replace routines safely.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="find-replace-top" format="horizontal" />
+
+      <!-- Find & Replace Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Error Alert (hidden by default) -->
+        <div id="error-alert" class="hidden bg-white border-l-4 border-error p-4 rounded-md shadow-sm">
+          <div class="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-error mt-0.5 animate-pulse">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <div>
+              <span class="block text-sm font-semibold text-ink">Invalid Regular Expression</span>
+              <span id="error-msg" class="block text-xs text-body mt-1 font-mono">Regex compilation error details...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Textarea input/output -->
+        <div class="flex flex-col gap-2">
+          <label for="replace-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+            Target Text
+          </label>
+          <textarea
+            id="replace-input"
+            class="w-full min-h-[220px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-base text-ink placeholder:text-mutedSoft transition-all"
+            placeholder="Paste your source text here to search and replace..."
+          ></textarea>
+        </div>
+
+        <!-- Inputs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="find-query" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Find text / pattern
+            </label>
+            <input
+              type="text"
+              id="find-query"
+              class="w-full h-11 px-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink placeholder:text-mutedSoft transition-all"
+              placeholder="Text or pattern to search for..."
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="replace-query" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Replace with
+            </label>
+            <input
+              type="text"
+              id="replace-query"
+              class="w-full h-11 px-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink placeholder:text-mutedSoft transition-all"
+              placeholder="Replacement text..."
+            />
+          </div>
+        </div>
+
+        <!-- Options Checkboxes -->
+        <div class="flex flex-wrap gap-6 items-center">
+          <label class="inline-flex items-center gap-2.5 cursor-pointer text-sm text-ink select-none">
+            <input
+              type="checkbox"
+              id="toggle-case"
+              class="w-4 h-4 rounded border-hairlineStrong text-primary focus:ring-0 cursor-pointer accent-primary"
+            />
+            Match case
+          </label>
+          <label class="inline-flex items-center gap-2.5 cursor-pointer text-sm text-ink select-none">
+            <input
+              type="checkbox"
+              id="toggle-regex"
+              class="w-4 h-4 rounded border-hairlineStrong text-primary focus:ring-0 cursor-pointer accent-primary"
+            />
+            Use Regular Expression (Regex)
+          </label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              id="process-btn"
+              class="h-10 px-5 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Replace All
+            </button>
+            <CopyButton targetId="replace-input" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear Text
+            </button>
+          </div>
+          <div id="result-msg" class="text-sm font-semibold text-success hidden">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="find-replace-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">How do I search using a Regular Expression?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Check the "Use Regular Expression" option, and enter your regex pattern in the "Find" box. For example, using `\d+` as the pattern matches any series of numbers. If you need to search and replace text containing specific layouts, regex is extremely powerful.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What does "Match Case" toggle change?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              When checked, the search matches words exactly as written, meaning searching for `The` will NOT match `the`. Disabling it ignores capitalization mismatches and matches all instances.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Can I perform multi-line replacements?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Yes. The main text area supports multi-line text input. Standard text replacements run globally across the entire input document. If you are using regular expressions, standard flags are applied so it matches across newlines where specified.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Is there any limit to the text size I can process?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              There is no artificial limit. Large documents up to several megabytes can be processed easily. Because operations are handled client-side in the browser, performance is governed by your device's speed.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="find-replace-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { findAndReplace } from '../../lib/textProcessing';
+
+  const inputEl = document.getElementById('replace-input') as HTMLTextAreaElement | null;
+  const findQueryEl = document.getElementById('find-query') as HTMLInputElement | null;
+  const replaceQueryEl = document.getElementById('replace-query') as HTMLInputElement | null;
+  
+  const processBtn = document.getElementById('process-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  
+  const toggleCase = document.getElementById('toggle-case') as HTMLInputElement | null;
+  const toggleRegex = document.getElementById('toggle-regex') as HTMLInputElement | null;
+  
+  const errorAlert = document.getElementById('error-alert');
+  const errorMsg = document.getElementById('error-msg');
+  const resultMsg = document.getElementById('result-msg');
+
+  function clearAlerts() {
+    if (errorAlert) errorAlert.classList.add('hidden');
+    if (resultMsg) resultMsg.classList.add('hidden');
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', () => {
+      if (!inputEl || !findQueryEl || !replaceQueryEl) return;
+      clearAlerts();
+
+      const text = inputEl.value;
+      const findStr = findQueryEl.value;
+      const replaceStr = replaceQueryEl.value;
+
+      if (!text || !findStr) return;
+
+      const matchCase = toggleCase ? toggleCase.checked : false;
+      const useRegex = toggleRegex ? toggleRegex.checked : false;
+
+      const result = findAndReplace(text, findStr, replaceStr, matchCase, useRegex);
+
+      if (result.error) {
+        if (errorAlert && errorMsg) {
+          errorMsg.textContent = result.error;
+          errorAlert.classList.remove('hidden');
+        }
+      } else {
+        inputEl.value = result.outputText;
+        if (resultMsg) {
+          resultMsg.textContent = `Replaced ${result.replacementsCount.toLocaleString()} instance${result.replacementsCount === 1 ? '' : 's'}.`;
+          resultMsg.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  if (clearBtn && inputEl && findQueryEl && replaceQueryEl) {
+    clearBtn.addEventListener('click', () => {
+      inputEl.value = '';
+      findQueryEl.value = '';
+      replaceQueryEl.value = '';
+      clearAlerts();
+      inputEl.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I search using a Regular Expression?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Check 'Use Regular Expression' and enter your regex in the Find input. Standard RegExp syntax (e.g. \\d+ to search for digits) is evaluated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does 'Match Case' toggle change?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Match Case enables case-sensitivity, matching exactly upper- and lower-cased characters as typed in the query."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I perform multi-line replacements?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The search and replace functions operate globally across the entire text including line breaks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there any limit to the text size I can process?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Processing is done client-side, making search and swap routines execute instantly relative to your system's performance."
+        }
+      }
+    ]
+  }
+</script>

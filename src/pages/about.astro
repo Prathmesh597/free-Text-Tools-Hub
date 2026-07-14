@@ -1,0 +1,49 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="About Us - Text Tools Hub"
+  description="Learn about the design philosophy, privacy guidelines, and technology behind Text Tools Hub."
+>
+  <div class="max-w-3xl mx-auto flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+        Company
+      </span>
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+        About Text Tools Hub
+      </h1>
+    </div>
+
+    <div class="prose prose-stone text-xs text-body flex flex-col gap-4 leading-relaxed">
+      <p class="text-sm text-body leading-relaxed">
+        Text Tools Hub was created to address a simple frustration: online text utilities are too often cluttered, slow, and raise serious data privacy concerns by uploading user input drafts to remote servers.
+      </p>
+      
+      <p>
+        Our vision is to provide a clean, distraction-free environment containing all essential formatting, counting, and encoding utilities, executing them completely inside your web browser. 
+      </p>
+
+      <h2 class="text-lg font-semibold text-ink mt-6 font-display tracking-tight">Design Philosophy: Quiet Utility</h2>
+      <p>
+        We believe that utility tools do not have to look like complex developer control panels or neon consoles. Taking inspiration from quiet and minimalist infrastructure brands, our interface features a pure white canvas layout (`#ffffff`) layered with sharp, near-black ink text (`#171717`) and white cards. We rely on generous whitespace, Inter typography at modest weights, and developer-ergonomic rounded corners (`rounded-lg` for cards, `rounded-md` for inputs/buttons) to make the workspace feel clean, premium, and focused.
+      </p>
+
+      <h2 class="text-lg font-semibold text-ink mt-6 font-display tracking-tight">Stateless, Edge-Native Architecture</h2>
+      <p>
+        Text Tools Hub is built using a JAMstack architecture on top of the <strong>Astro</strong> static framework. It has no databases, no server endpoints, and no backend frameworks. By running all logic in TypeScript directly inside the client's browser, we achieve:
+      </p>
+      <ul class="list-disc pl-5 flex flex-col gap-2">
+        <li><strong>Instant Response:</strong> Zero latency. Character counts and JSON formatting execute in microseconds.</li>
+        <li><strong>Privacy:</strong> Your files and texts never transit across the internet to our servers.</li>
+        <li><strong>Stability:</strong> The tools scale infinitely and are resistant to hosting server outages.</li>
+      </ul>
+
+      <h2 class="text-lg font-semibold text-ink mt-6 font-display tracking-tight font-semibold">Meet the Team</h2>
+      <p>
+        We are a small, passionate group of writers, designers, and software engineers who use these tools daily. If you would like to submit feature requests, ask custom questions, or collaborate with us, please visit our <a href="/contact" class="text-text-link hover:underline font-semibold">Contact Page</a>.
+      </p>
+    </div>
+  </div>
+</MainLayout>

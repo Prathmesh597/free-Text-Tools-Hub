@@ -1,0 +1,115 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Contact Us - Text Tools Hub"
+  description="Have feedback or tool recommendations? Get in touch with the Text Tools Hub team."
+>
+  <div class="max-w-2xl mx-auto flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+        Get in Touch
+      </span>
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+        Contact Us
+      </h1>
+      <p class="text-xs text-body leading-relaxed max-w-xl">
+        Have suggestions, feedback, or need a new text tool added? Drop us a message below. We review all requests and iterate on features weekly!
+      </p>
+    </div>
+
+    <!-- Success message (hidden by default) -->
+    <div id="success-alert" class="hidden bg-white border-l-4 border-success p-6 rounded-r-lg shadow-sm my-2 border-y border-r border-hairline">
+      <div class="flex items-start gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-success mt-0.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <span class="block text-sm font-semibold text-ink font-display">Message Sent Successfully!</span>
+          <span class="block text-xs text-body mt-1">Thank you for reaching out. We will get back to you shortly if required.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form card -->
+    <form id="contact-form" class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+      
+      <!-- Name -->
+      <div class="flex flex-col gap-1.5">
+        <label for="contact-name" class="text-xs font-semibold tracking-wider uppercase text-muted">
+          Your Name
+        </label>
+        <input
+          type="text"
+          id="contact-name"
+          required
+          class="w-full h-11 px-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink placeholder:text-mutedSoft transition-all"
+          placeholder="Enter your name..."
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="flex flex-col gap-1.5">
+        <label for="contact-email" class="text-xs font-semibold tracking-wider uppercase text-muted">
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          required
+          class="w-full h-11 px-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink placeholder:text-mutedSoft transition-all"
+          placeholder="name@example.com"
+        />
+      </div>
+
+      <!-- Message -->
+      <div class="flex flex-col gap-1.5">
+        <label for="contact-message" class="text-xs font-semibold tracking-wider uppercase text-muted">
+          Your Message
+        </label>
+        <textarea
+          id="contact-message"
+          required
+          class="w-full min-h-[150px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-sm text-ink placeholder:text-mutedSoft transition-all"
+          placeholder="How can we help you or what tool would you like to see?"
+        ></textarea>
+      </div>
+
+      <div class="pt-4 border-t border-hairline flex justify-end">
+        <button
+          type="submit"
+          class="h-11 px-6 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+        >
+          Send Message
+        </button>
+      </div>
+
+    </form>
+  </div>
+</MainLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successAlert = document.getElementById('success-alert');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = (document.getElementById('contact-name') as HTMLInputElement)?.value;
+      const email = (document.getElementById('contact-email') as HTMLInputElement)?.value;
+      const message = (document.getElementById('contact-message') as HTMLTextAreaElement)?.value;
+
+      if (!name || !email || !message) return;
+
+      console.log('Form submission payload:', { name, email, message });
+
+      form.reset();
+      form.classList.add('hidden');
+      if (successAlert) {
+        successAlert.classList.remove('hidden');
+      }
+    });
+  }
+</script>

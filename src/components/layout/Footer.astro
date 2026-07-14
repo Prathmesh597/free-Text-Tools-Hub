@@ -1,0 +1,65 @@
+---
+import tools from '../../data/tools.json';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full bg-canvas border-t border-hairline mt-auto text-sm text-body">
+  <div class="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+    
+    <!-- Column 1: Brand & Info (Span 4) -->
+    <div class="md:col-span-4 flex flex-col gap-3">
+      <a href="/" class="font-semibold text-ink text-base">
+        Text Tools Hub
+      </a>
+      <p class="text-xs text-body leading-relaxed max-w-xs">
+        Free, edge-native utility tools for developers, writers, and designers. Everything executes locally in your browser sandbox, ensuring absolute data privacy.
+      </p>
+    </div>
+
+    <!-- Column 2: Essential Tools (Span 3) -->
+    <div class="md:col-span-3 flex flex-col gap-3">
+      <h4 class="text-xs font-semibold text-ink uppercase tracking-wider">Popular Tools</h4>
+      <div class="flex flex-col gap-2.5 text-xs">
+        <a href="/tools/word-counter" class="hover:text-ink transition-colors">Word Counter</a>
+        <a href="/tools/case-converter" class="hover:text-ink transition-colors">Case Converter</a>
+        <a href="/tools/json-formatter" class="hover:text-ink transition-colors">JSON Formatter</a>
+        <a href="/tools/base64-encoder" class="hover:text-ink transition-colors">Base64 Encoder</a>
+      </div>
+    </div>
+
+    <!-- Column 3: More Tools (Span 3) -->
+    <div class="md:col-span-3 flex flex-col gap-3">
+      <h4 class="text-xs font-semibold text-ink uppercase tracking-wider">Other Tools</h4>
+      <div class="flex flex-col gap-2.5 text-xs">
+        <a href="/tools/remove-duplicates" class="hover:text-ink transition-colors">Remove Duplicates</a>
+        <a href="/tools/find-and-replace" class="hover:text-ink transition-colors">Find & Replace</a>
+        <a href="/tools/lorem-ipsum-generator" class="hover:text-ink transition-colors">Lorem Ipsum</a>
+        <a href="/tools/text-to-speech" class="hover:text-ink transition-colors">Text to Speech</a>
+      </div>
+    </div>
+
+    <!-- Column 4: Compliance / Company (Span 2) -->
+    <div class="md:col-span-2 flex flex-col gap-3">
+      <h4 class="text-xs font-semibold text-ink uppercase tracking-wider">Company</h4>
+      <div class="flex flex-col gap-2.5 text-xs">
+        <a href="/about" class="hover:text-ink transition-colors">About Us</a>
+        <a href="/contact" class="hover:text-ink transition-colors">Contact</a>
+        <a href="/privacy" class="text-text-link hover:underline transition-colors">Privacy Policy</a>
+        <a href="/terms" class="hover:text-ink transition-colors">Terms of Service</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom copyrights bar -->
+  <div class="border-t border-hairline py-8 text-xs text-muted">
+    <div class="max-w-[1200px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; {year} Text Tools Hub. All rights reserved.</span>
+      <span class="flex items-center gap-1.5 font-medium text-ink">
+        <span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+        Edge-native processing
+      </span>
+    </div>
+  </div>
+</footer>

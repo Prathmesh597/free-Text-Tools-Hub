@@ -1,0 +1,416 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Text-to-Speech (TTS) - Real-time Voice Reader"
+  description="Convert your written text into spoken audio using browser Web Speech API. Select voice models, adjust speed rate and pitch, entirely client-side."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Text to Speech (TTS)
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Need to listen to a document draft, study an essay aloud, or generate quick spoken vocals? Our free online text-to-speech reader parses text blocks into high-quality audio formats using browser Web Speech synthesizers. Select from available system voice models, adjust speaking speed and pitch, and play/pause your playback locally.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="text-to-speech-top" format="horizontal" />
+
+      <!-- TTS Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Textarea input -->
+        <div class="flex flex-col gap-2">
+          <label for="speech-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+            Enter text to read aloud
+          </label>
+          <textarea
+            id="speech-input"
+            class="w-full min-h-[220px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-base text-ink placeholder:text-mutedSoft transition-all"
+            placeholder="Paste or write the text you want the reader to speak..."
+          >Hello! Welcome to Text Tools Hub. This is a local text-to-speech generator operating completely in your web browser. Type some text and click Play to hear it read aloud.</textarea>
+        </div>
+
+        <!-- Configurations (Voice, Speed, Pitch) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Voice Select -->
+          <div class="flex flex-col gap-1.5">
+            <label for="voice-select" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Select Voice
+            </label>
+            <select
+              id="voice-select"
+              class="w-full h-11 px-3 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink cursor-pointer transition-all"
+            >
+              <option value="">Loading system voices...</option>
+            </select>
+          </div>
+
+          <!-- Speed Rate -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between">
+              <label for="rate-range" class="text-xs font-semibold tracking-wider uppercase text-muted">
+                Speed (Rate)
+              </label>
+              <span id="rate-val" class="text-xs font-semibold text-ink">1.0x</span>
+            </div>
+            <input
+              type="range"
+              id="rate-range"
+              min="0.5"
+              max="2.0"
+              step="0.1"
+              value="1.0"
+              class="w-full accent-primary h-2 bg-hairline rounded-lg appearance-none cursor-pointer mt-3"
+            />
+          </div>
+
+          <!-- Pitch -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between">
+              <label for="pitch-range" class="text-xs font-semibold tracking-wider uppercase text-muted">
+                Pitch
+              </label>
+              <span id="pitch-val" class="text-xs font-semibold text-ink">1.0</span>
+            </div>
+            <input
+              type="range"
+              id="pitch-range"
+              min="0.5"
+              max="1.5"
+              step="0.1"
+              value="1.0"
+              class="w-full accent-primary h-2 bg-hairline rounded-lg appearance-none cursor-pointer mt-3"
+            />
+          </div>
+        </div>
+
+        <!-- Active Status Indicator -->
+        <div id="status-indicator" class="hidden items-center gap-2.5 p-3 bg-surfaceStrong border border-hairlineStrong rounded-md">
+          <span class="w-2.5 h-2.5 rounded-full bg-success animate-ping"></span>
+          <span class="text-xs font-semibold text-ink">Speech Synthesis active and playing...</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              id="play-btn"
+              class="h-10 px-6 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm inline-flex items-center gap-2"
+            >
+              <!-- Play icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+              </svg>
+              Play
+            </button>
+            <button
+              type="button"
+              id="pause-btn"
+              class="h-10 px-5 border border-hairlineStrong hover:bg-surfaceStrong text-ink font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all inline-flex items-center gap-2"
+            >
+              <!-- Pause icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+              </svg>
+              Pause
+            </button>
+            <button
+              type="button"
+              id="stop-btn"
+              class="h-10 px-5 border border-hairlineStrong hover:bg-surfaceStrong text-ink font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all inline-flex items-center gap-2"
+            >
+              <!-- Stop icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z" clip-rule="evenodd" />
+              </svg>
+              Stop
+            </button>
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear Text
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="text-to-speech-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">How is this text-to-speech reader completely free?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              This tool utilizes the native **Web Speech API** (`window.speechSynthesis`) built directly into modern web browsers (Chrome, Safari, Firefox, and Edge). Since the synthesized sound calculations run locally on your operating system, there are zero server costs or paid external API dependencies.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What voice models can I select?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              The available voice models are loaded dynamically from your operating system and web browser. They typically include local system voices (e.g. Microsoft David/Zira on Windows, Apple Siri/Samantha on macOS, or Google Speech synthesize voice models on Chrome).
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">How can I adjust speech rates and pitch?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              We provide simple sliding scales to customize the playback. The **Rate** slider controls the reading speed (ranging from slow 0.5x to double speed 2.0x). The **Pitch** slider changes the synthesized vocal frequency higher or lower.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Can I download the spoken audio file?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              No. Because the browser synthesizes the text locally on-the-fly directly to your speakers, standard browser Web Speech APIs do not generate an audio file format (like MP3 or WAV). The tool is designed specifically for online reading.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="text-to-speech-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  const speechInput = document.getElementById('speech-input') as HTMLTextAreaElement | null;
+  const voiceSelect = document.getElementById('voice-select') as HTMLSelectElement | null;
+  
+  const rateRange = document.getElementById('rate-range') as HTMLInputElement | null;
+  const rateVal = document.getElementById('rate-val');
+  const pitchRange = document.getElementById('pitch-range') as HTMLInputElement | null;
+  const pitchVal = document.getElementById('pitch-val');
+
+  const playBtn = document.getElementById('play-btn');
+  const pauseBtn = document.getElementById('pause-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  
+  const statusIndicator = document.getElementById('status-indicator');
+
+  const SAMPLES: Record<string, string> = {
+    en: "Hello! Welcome to Text Tools Hub. This is a local text-to-speech generator operating completely in your web browser. Type some text and click Play to hear it read aloud.",
+    es: "¡Hola! Bienvenido a Text Tools Hub. Este es un generador de texto a voz local que funciona completamente en su navegador web. Escriba algún texto y haga clic en Reproducir para escucharlo en voz alta.",
+    fr: "Bonjour! Bienvenue sur Text Tools Hub. Il s'agit d'un générateur de synthèse vocale local fonctionnant entièrement dans votre navigateur Web. Saisissez du texte et cliquez sur Jouer pour l'entendre à haute voix.",
+    de: "Hallo! Willkommen bei Text Tools Hub. Dies ist ein lokaler Text-zu-Sprache-Generator, der vollständig in Ihrem Webbrowser ausgeführt wird. Geben Sie Text ein und klicken Sie auf Abspielen, um ihn laut zu hören.",
+    it: "Ciao! Benvenuto su Text Tools Hub. Questo è un generatore locale di sintesi vocale che funziona interamente nel tuo browser web. Digita del testo e fai clic su Riproduci per ascoltarlo ad alta voce.",
+    hi: "नमस्ते! टेक्स्ट टूल्स हब में आपका स्वागत है। यह एक स्थानीय टेक्स्ट-टू-स्पीच जनरेटर है जो पूरी तरह से आपके वेब ब्राउज़र में काम करता है। कुछ टेक्स्ट टाइप करें और इसे सुनने के लिए प्ले पर क्लिक करें।",
+    mr: "नमस्कार! टेक्स्ट टूल्स हबमध्ये आपले स्वागत आहे. हे एक स्थानिक टेक्स्ट-टू-स्पीच जनरेटर आहे जे पूर्णपणे आपल्या वेब ब्राउझरमध्ये कार्य करते. काही मजकूर टाइप करा आणि ऐकण्यासाठी प्ले वर क्लिक करा."
+  };
+
+  function getSampleTextForLang(langCode: string): string {
+    return SAMPLES[langCode] || SAMPLES.en;
+  }
+
+  function isSampleOrEmpty(text: string): boolean {
+    const trimmed = text.trim();
+    if (!trimmed) return true;
+    return Object.values(SAMPLES).some(s => s.trim() === trimmed);
+  }
+
+  function updateSampleText() {
+    if (!speechInput || !voiceSelect) return;
+    const idx = parseInt(voiceSelect.value);
+    const voice = voices[idx];
+    if (!voice) return;
+
+    const langCode = voice.lang.split(/[-_]/)[0].toLowerCase();
+    const currentVal = speechInput.value;
+
+    if (isSampleOrEmpty(currentVal)) {
+      speechInput.value = getSampleTextForLang(langCode);
+    }
+  }
+
+  let voices: SpeechSynthesisVoice[] = [];
+
+  function loadVoices() {
+    if (!window.speechSynthesis) return;
+    voices = window.speechSynthesis.getVoices();
+    if (!voiceSelect) return;
+    
+    voiceSelect.innerHTML = '';
+    
+    if (voices.length === 0) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'No system voices available';
+      voiceSelect.appendChild(opt);
+      return;
+    }
+
+    voices.forEach((voice, idx) => {
+      const option = document.createElement('option');
+      option.value = idx.toString();
+      option.textContent = `${voice.name} (${voice.lang})`;
+      
+      if (voice.default || voice.lang.startsWith('en-US')) {
+        option.selected = true;
+      }
+      voiceSelect.appendChild(option);
+    });
+
+    updateSampleText();
+  }
+
+  loadVoices();
+
+  if (voiceSelect) {
+    voiceSelect.addEventListener('change', updateSampleText);
+  }
+
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }
+
+  if (rateRange && rateVal) {
+    rateRange.addEventListener('input', () => {
+      rateVal.textContent = `${parseFloat(rateRange.value).toFixed(1)}x`;
+    });
+  }
+  if (pitchRange && pitchVal) {
+    pitchRange.addEventListener('input', () => {
+      pitchVal.textContent = parseFloat(pitchRange.value).toFixed(1);
+    });
+  }
+
+  function showSpeakingState() {
+    if (statusIndicator) statusIndicator.classList.remove('hidden');
+  }
+
+  function hideSpeakingState() {
+    if (statusIndicator) statusIndicator.classList.add('hidden');
+  }
+
+  if (playBtn) {
+    playBtn.addEventListener('click', () => {
+      if (!window.speechSynthesis || !speechInput || !voiceSelect) return;
+      const text = speechInput.value.trim();
+      if (!text) return;
+
+      if (window.speechSynthesis.speaking && window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        showSpeakingState();
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      const idx = parseInt(voiceSelect.value);
+      if (voices[idx]) {
+        utterance.voice = voices[idx];
+      }
+
+      if (rateRange) utterance.rate = parseFloat(rateRange.value);
+      if (pitchRange) utterance.pitch = parseFloat(pitchRange.value);
+
+      utterance.onstart = showSpeakingState;
+      utterance.onend = hideSpeakingState;
+      utterance.onerror = hideSpeakingState;
+
+      window.speechSynthesis.speak(utterance);
+    });
+  }
+
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+        hideSpeakingState();
+      }
+    });
+  }
+
+  if (stopBtn) {
+    stopBtn.addEventListener('click', () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        hideSpeakingState();
+      }
+    });
+  }
+
+  if (clearBtn && speechInput) {
+    clearBtn.addEventListener('click', () => {
+      speechInput.value = '';
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      hideSpeakingState();
+      speechInput.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is this text-to-speech reader completely free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool utilizes the native Web Speech API built directly into modern web browsers, running all audio syntheses locally on your operating system for $0 hosting costs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What voice models can I select?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Available voice models are loaded dynamically from your operating system and browser platforms (e.g. Apple Siri, Microsoft David, or Google voices)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I adjust speech rates and pitch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We provide simple range sliders to adjust the speed rate from 0.5x to 2.0x and the pitch parameters to customize your audio output."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download the spoken audio file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The browser synthesizes audio on-the-fly to your local audio output directly, and does not record or export MP3 or WAV formats."
+        }
+      }
+    ]
+  }
+</script>

@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title = 'Text Tools Hub - Free Client-Side Text Utility Suite',
+  description = 'A suite of fast, secure, and privacy-focused client-side text manipulation tools. Word counter, case converter, JSON formatter, Base64 encoder, and more.',
+  canonicalURL: customCanonicalURL,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://texttoolshub.vercel.app';
+const canonicalURL = customCanonicalURL || new URL(Astro.url.pathname, siteUrl).toString();
+
+const adsenseClientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+const ga4Id = import.meta.env.PUBLIC_GA4_ID;
+
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    {adsenseClientId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+
+    {ga4Id && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+        <script is:inline define:vars={{ ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga4Id);
+        </script>
+      </>
+    )}
+  </head>
+  <body class="bg-canvas text-body font-body min-h-screen flex flex-col antialiased relative overflow-x-hidden">
+    <Header />
+
+    <main class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-12 md:py-16 z-10 relative">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

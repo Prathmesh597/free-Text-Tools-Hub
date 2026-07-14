@@ -1,0 +1,295 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Lorem Ipsum Generator - Placeholder Text Generator"
+  description="Generate paragraphs, sentences, or words of standard Lorem Ipsum dummy text. Copy instantly for designs, layouts, or mockups."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Lorem Ipsum Generator
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Designing a webpage layout, printing template, or graphics outline and need placeholder text? Our free online Lorem Ipsum generator builds customized dummy Latin text instantly. Generate precise quantities of words, sentences, or paragraphs to fit your layout requirements perfectly.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="lorem-ipsum-top" format="horizontal" />
+
+      <!-- Generator Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Controls Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+          <div class="flex flex-col gap-1.5">
+            <label for="generator-type" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Generate Unit
+            </label>
+            <select
+              id="generator-type"
+              class="w-full h-11 px-3 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink cursor-pointer transition-all animate-none"
+            >
+              <option value="paragraphs">Paragraphs</option>
+              <option value="sentences">Sentences</option>
+              <option value="words">Words</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="generator-count" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Quantity
+            </label>
+            <input
+              type="number"
+              id="generator-count"
+              min="1"
+              max="200"
+              value="5"
+              class="w-full h-11 px-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink transition-all"
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              id="process-btn"
+              class="w-full h-11 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Generate Placeholder
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Area -->
+        <div class="flex flex-col gap-2">
+          <label for="generator-output" class="text-xs font-semibold tracking-wider uppercase text-muted">
+            Generated Text
+          </label>
+          <textarea
+            id="generator-output"
+            readonly
+            class="w-full min-h-[250px] p-4 bg-canvasSoft border border-hairlineStrong rounded-md focus:outline-none font-body text-base text-ink placeholder:text-mutedSoft transition-all resize-y"
+            placeholder="Generated Lorem Ipsum dummy text will appear here..."
+          ></textarea>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <CopyButton targetId="generator-output" class="hidden" id="copy-btn-wrapper" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="lorem-ipsum-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is Lorem Ipsum?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Lorem Ipsum is dummy placeholder text used widely in printing, publishing, and graphic design. It is derived from a 1st-century BC Latin treatise by Cicero, but scrambled so that its words have no literal meaning, preventing readable text from distracting from layout designs.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Why not use standard English text for mockups?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              When viewing a page mockup, readable language draws focus away from the aesthetic structure and visual spacing. Lorem Ipsum provides a natural distribution of word lengths and letters, simulating actual text without drawing reading attention.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Where does the default text come from?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              The standard passage starts with "Lorem ipsum dolor sit amet, consectetur adipiscing elit...". Our generator uses the classic vocabulary set and randomizes line construction to simulate custom paragraph blocks.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Is there a maximum limit for generation?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              We cap individual web generation at 200 units (paragraphs, sentences, or words) to ensure instant rendering. You can run the generator multiple times to create larger layouts.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="lorem-ipsum-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  const LOREM_WORDS = [
+    'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do',
+    'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua', 'ut',
+    'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco', 'laboris', 'nisi',
+    'ut', 'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure', 'dolor',
+    'in', 'reprehenderit', 'in', 'voluptate', 'velit', 'esse', 'cillum', 'dolore', 'eu', 'fugiat',
+    'nulla', 'pariatur', 'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'in',
+    'culpa', 'qui', 'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+  ];
+
+  const typeEl = document.getElementById('generator-type') as HTMLSelectElement | null;
+  const countEl = document.getElementById('generator-count') as HTMLInputElement | null;
+  const outputEl = document.getElementById('generator-output') as HTMLTextAreaElement | null;
+  const processBtn = document.getElementById('process-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const copyBtnWrapper = document.getElementById('copy-btn-wrapper');
+
+  function getRandomWord(): string {
+    const idx = Math.floor(Math.random() * LOREM_WORDS.length);
+    return LOREM_WORDS[idx];
+  }
+
+  function generateSentence(startWithStandard: boolean = false): string {
+    const len = Math.floor(Math.random() * 8) + 6; // 6 to 13 words
+    const words: string[] = [];
+
+    if (startWithStandard) {
+      words.push('lorem', 'ipsum', 'dolor', 'sit', 'amet');
+    }
+
+    while (words.length < len) {
+      words.push(getRandomWord());
+    }
+
+    const sentence = words.join(' ');
+    return sentence.charAt(0).toUpperCase() + sentence.substring(1) + '.';
+  }
+
+  function generateParagraph(startWithStandard: boolean = false): string {
+    const len = Math.floor(Math.random() * 3) + 3; // 3 to 5 sentences
+    const sentences: string[] = [];
+    
+    for (let i = 0; i < len; i++) {
+      sentences.push(generateSentence(i === 0 && startWithStandard));
+    }
+    return sentences.join(' ');
+  }
+
+  function handleGenerate() {
+    if (!typeEl || !countEl || !outputEl) return;
+    const type = typeEl.value;
+    let qty = parseInt(countEl.value);
+    
+    if (isNaN(qty) || qty < 1) qty = 3;
+    if (qty > 200) qty = 200;
+    countEl.value = qty.toString();
+
+    let output = '';
+
+    if (type === 'words') {
+      const words: string[] = ['lorem', 'ipsum', 'dolor', 'sit', 'amet'];
+      while (words.length < qty) {
+        words.push(getRandomWord());
+      }
+      if (qty < 5) {
+        words.length = qty;
+      }
+      output = words.join(' ');
+    } else if (type === 'sentences') {
+      const sentences: string[] = [];
+      for (let i = 0; i < qty; i++) {
+        sentences.push(generateSentence(i === 0));
+      }
+      output = sentences.join(' ');
+    } else {
+      const paragraphs: string[] = [];
+      for (let i = 0; i < qty; i++) {
+        paragraphs.push(generateParagraph(i === 0));
+      }
+      output = paragraphs.join('\n\n');
+    }
+
+    outputEl.value = output;
+
+    if (copyBtnWrapper) {
+      copyBtnWrapper.classList.remove('hidden');
+    }
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', handleGenerate);
+  }
+
+  if (clearBtn && outputEl) {
+    clearBtn.addEventListener('click', () => {
+      outputEl.value = '';
+      if (copyBtnWrapper) {
+        copyBtnWrapper.classList.add('hidden');
+      }
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Lorem Ipsum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lorem Ipsum is scrambled Latin text derived from Cicero's writings. It is standard dummy placeholder text used in layouts to review visuals without readable distraction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why not use English dummy text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Readable words pull the eye to read. Scrambled Latin simulates realistic text lengths and lettering density without causing cognitive reading distraction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the default text come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The classic passage begins with 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...'. Our database generates structured words, sentences, or paragraphs based on this template."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a maximum limit for generation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We cap singular generation at 200 items (words, sentences, or paragraphs) to maintain rapid local browser execution."
+        }
+      }
+    ]
+  }
+</script>

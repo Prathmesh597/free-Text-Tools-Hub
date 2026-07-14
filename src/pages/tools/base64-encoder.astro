@@ -1,0 +1,307 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Base64 Encoder & Decoder - UTF-8 Supported"
+  description="Convert plain text to Base64 format or decode Base64 back to readable text. Supports full UTF-8 emojis and characters, operating 100% locally."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Base64 Encoder & Decoder
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Need to transmit binary-safe data over media that only supports text, or decode raw strings for testing? Our free online Base64 tool makes it easy to encode plain text or decode Base64 strings. It natively supports UTF-8 character encoding, ensuring that emojis, letters, and international characters convert flawlessly.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="base64-top" format="horizontal" />
+
+      <!-- Base64 Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Error Alert (hidden by default) -->
+        <div id="error-alert" class="hidden bg-white border-l-4 border-error p-4 rounded-md shadow-sm">
+          <div class="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-error mt-0.5 animate-pulse">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <div>
+              <span class="block text-sm font-semibold text-ink">Decoding Failed</span>
+              <span id="error-msg" class="block text-xs text-body mt-1">Please check if the input is a valid Base64 encoded string.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Double Textareas Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Plain Text Area -->
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between items-center">
+              <label for="plain-text" class="text-xs font-semibold tracking-wider uppercase text-muted">
+                Plain Text (UTF-8)
+              </label>
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  id="load-plain-sample-btn"
+                  class="text-xs text-text-link hover:underline font-semibold cursor-pointer mr-1"
+                >
+                  Insert Sample
+                </button>
+                <CopyButton targetId="plain-text" class="h-8 px-3 text-xs" />
+              </div>
+            </div>
+            <textarea
+              id="plain-text"
+              class="w-full min-h-[220px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-base text-ink placeholder:text-mutedSoft transition-all"
+              placeholder="Enter plain text to encode here..."
+            ></textarea>
+          </div>
+          
+          <!-- Base64 Text Area -->
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between items-center">
+              <label for="base64-text" class="text-xs font-semibold tracking-wider uppercase text-muted">
+                Base64 Encoded Text
+              </label>
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  id="load-b64-sample-btn"
+                  class="text-xs text-text-link hover:underline font-semibold cursor-pointer mr-1"
+                >
+                  Insert Sample
+                </button>
+                <CopyButton targetId="base64-text" class="h-8 px-3 text-xs" />
+              </div>
+            </div>
+            <textarea
+              id="base64-text"
+              class="w-full min-h-[220px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-mono text-[13px] text-ink placeholder:text-mutedSoft transition-all"
+              placeholder="Enter Base64 text to decode here..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              id="encode-btn"
+              class="h-10 px-5 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Encode Plain Text
+            </button>
+            <button
+              type="button"
+              id="decode-btn"
+              class="h-10 px-5 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Decode Base64
+            </button>
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear Both
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="base64-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is Base64 encoding used for?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Base64 encoding is widely used to convert binary data (like images or zip files) into a safe ASCII string format. This prevents data corruption when transferring values over text-based networks, email protocols, or embedding files inline in HTML/CSS.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">How does this tool support UTF-8 characters?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Standard JavaScript `btoa` functions throw errors when encoding unicode/UTF-8 characters (like emojis or foreign scripts). Our tool implements a byte-safe conversion wrapper using the browser's `TextEncoder` and `TextDecoder` APIs, allowing any string to be safely encoded and decoded.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What causes a Base64 decoding error?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              A decoding error occurs if the Base64 input contains characters outside the standard Base64 alphabet (A-Z, a-z, 0-9, +, /, and padding =), has incorrect padding lengths, or contains invalid spacing. If decoding fails, our tool catches the exception and displays an error box.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Does this encoder send my data to a server?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              No. The encoding and decoding logic is executed entirely in your browser sandbox. Your plain text or encoded text values never traverse the network, ensuring absolute confidentiality for API keys, passwords, and sensitive text payloads.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="base64-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { base64Encode, base64Decode } from '../../lib/encoding';
+
+  const plainEl = document.getElementById('plain-text') as HTMLTextAreaElement | null;
+  const base64El = document.getElementById('base64-text') as HTMLTextAreaElement | null;
+  
+  const encodeBtn = document.getElementById('encode-btn');
+  const decodeBtn = document.getElementById('decode-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const loadPlainSampleBtn = document.getElementById('load-plain-sample-btn');
+  const loadB64SampleBtn = document.getElementById('load-b64-sample-btn');
+  
+  const errorAlert = document.getElementById('error-alert');
+  const errorMsg = document.getElementById('error-msg');
+
+  if (loadPlainSampleBtn && plainEl) {
+    loadPlainSampleBtn.addEventListener('click', () => {
+      plainEl.value = "Hello, World! 🚀 This is a sample plain text string to encode to Base64 using edge-native browser utilities.";
+      clearAlerts();
+      if (base64El) base64El.value = "";
+      plainEl.focus();
+    });
+  }
+
+  if (loadB64SampleBtn && base64El) {
+    loadB64SampleBtn.addEventListener('click', () => {
+      base64El.value = "U0dWc2JHOGEsIFZkeWRIUnNJRjBlY3lCemFXNXdiR1VnY0d4aGFXNWdaR1YyYVc1bGMzUnlZVzVqWlhKeklHRnlaR1VnZEdvZ1FtRnpNall0Wlc1amIyUmxjbUYwYVc5dWN5QjFkR2xzYVhScGNYTWc9PQ==";
+      clearAlerts();
+      if (plainEl) plainEl.value = "";
+      base64El.focus();
+    });
+  }
+
+  function clearAlerts() {
+    if (errorAlert) errorAlert.classList.add('hidden');
+  }
+
+  function showError(msg: string) {
+    if (errorAlert && errorMsg) {
+      errorMsg.textContent = msg;
+      errorAlert.classList.remove('hidden');
+    }
+  }
+
+  if (encodeBtn) {
+    encodeBtn.addEventListener('click', () => {
+      if (!plainEl || !base64El) return;
+      clearAlerts();
+      const text = plainEl.value;
+      if (!text) {
+        base64El.value = '';
+        return;
+      }
+      try {
+        const encoded = base64Encode(text);
+        base64El.value = encoded;
+      } catch (err: any) {
+        showError(err.message || 'Failed to encode text.');
+      }
+    });
+  }
+
+  if (decodeBtn) {
+    decodeBtn.addEventListener('click', () => {
+      if (!plainEl || !base64El) return;
+      clearAlerts();
+      const b64 = base64El.value;
+      if (!b64) {
+        plainEl.value = '';
+        return;
+      }
+      try {
+        const decoded = base64Decode(b64);
+        plainEl.value = decoded;
+      } catch (err: any) {
+        plainEl.value = '';
+        showError('Decoding failed: The input string is not a valid Base64-encoded string.');
+      }
+    });
+  }
+
+  if (clearBtn && plainEl && base64El) {
+    clearBtn.addEventListener('click', () => {
+      plainEl.value = '';
+      base64El.value = '';
+      clearAlerts();
+      plainEl.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Base64 encoding used for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 encoding is widely used to convert binary data (like images or zip files) into a safe ASCII string format. This prevents data corruption when transferring values over text-based networks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this tool support UTF-8 characters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our tool implements a byte-safe conversion wrapper using the browser's TextEncoder and TextDecoder APIs, allowing any string (including emojis and international text) to be safely encoded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What causes a Base64 decoding error?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A decoding error occurs if the Base64 input contains characters outside the standard Base64 alphabet, has incorrect padding lengths, or contains invalid spacing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this encoder send my data to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The encoding and decoding logic is executed entirely in your browser sandbox. None of your inputs traverse the network."
+        }
+      }
+    ]
+  }
+</script>

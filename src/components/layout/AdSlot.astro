@@ -1,0 +1,35 @@
+---
+interface Props {
+  slotId?: string;
+  format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical';
+  style?: string;
+  class?: string;
+}
+
+const {
+  slotId = 'default-slot',
+  format = 'auto',
+  style = 'display:block',
+  class: className = '',
+} = Astro.props;
+
+const adsenseClientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+const isProd = import.meta.env.PROD;
+const showAd = adsenseClientId && !adsenseClientId.includes('XXXXXX') && isProd;
+---
+
+{showAd && (
+  <div class={`my-4 overflow-hidden flex justify-center ${className}`}>
+    <ins
+      class="adsbygoogle"
+      style={style}
+      data-ad-client={adsenseClientId}
+      data-ad-slot={slotId}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    />
+    <script is:inline>
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+)}

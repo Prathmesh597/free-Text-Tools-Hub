@@ -1,0 +1,95 @@
+---
+import tools from '../../data/tools.json';
+import ToolIcon from '../ui/ToolIcon.astro';
+---
+
+<header class="w-full bg-canvas border-b border-hairline sticky top-0 z-50 h-16 flex items-center">
+  <div class="max-w-[1200px] w-full mx-auto px-6 flex items-center justify-between">
+    <!-- Brand/Logo -->
+    <a href="/" class="flex items-center gap-2.5 group">
+      <span class="text-lg font-semibold tracking-tight text-ink group-hover:text-primary transition-colors">
+        Text Tools Hub
+      </span>
+      <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full">
+        100% Local
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="/" class="text-body hover:text-ink transition-colors">Home</a>
+      
+      <!-- Dropdown container -->
+      <div class="relative group/dropdown">
+        <button class="flex items-center gap-1 text-body hover:text-ink transition-colors cursor-pointer py-2">
+          Tools
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 transition-transform group-hover/dropdown:rotate-180">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        
+        <!-- Dropdown menu -->
+        <div class="hidden group-hover/dropdown:block absolute top-full right-0 mt-1 w-64 bg-canvas border border-hairlineStrong rounded-md shadow-md p-2 origin-top-right z-50">
+          <div class="grid gap-1">
+            {tools.map(tool => (
+              <a 
+                href={`/tools/${tool.slug}`} 
+                class="flex items-start gap-3.5 p-2.5 rounded hover:bg-canvasSoft transition-colors"
+              >
+                <ToolIcon slug={tool.slug} class="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <span class="block text-sm font-semibold text-ink leading-none">{tool.name}</span>
+                  <span class="block text-xs text-muted line-clamp-1 font-normal mt-1 leading-normal">{tool.description}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <a href="/about" class="text-body hover:text-ink transition-colors">About</a>
+      <a href="/contact" class="text-body hover:text-ink transition-colors">Contact</a>
+    </nav>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded hover:bg-surfaceStrong transition-colors text-ink" aria-label="Toggle Navigation Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 border-b border-hairline bg-surfaceCard z-50">
+    <div class="px-6 py-4 flex flex-col gap-3 text-sm font-medium shadow-lg">
+      <a href="/" class="text-ink py-1">Home</a>
+      <div class="border-t border-hairline my-1"></div>
+      <span class="text-[10px] font-semibold text-muted uppercase tracking-wider">All Tools</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {tools.map(tool => (
+          <a 
+            href={`/tools/${tool.slug}`} 
+            class="flex items-center gap-2.5 p-2 rounded hover:bg-canvasSoft transition-colors"
+          >
+            <ToolIcon slug={tool.slug} class="w-4 h-4 text-muted" />
+            <span class="text-xs font-semibold text-ink">{tool.name}</span>
+          </a>
+        ))}
+      </div>
+      <div class="border-t border-hairline my-1"></div>
+      <a href="/about" class="text-body py-1 hover:text-ink">About</a>
+      <a href="/contact" class="text-body py-1 hover:text-ink">Contact</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "word-counter",
+    "name": "Word Counter",
+    "slug": "word-counter",
+    "description": "Count words, characters, sentences, paragraphs, and estimate reading time in real-time.",
+    "keywords": ["word counter", "word count", "character counter", "reading time"]
+  },
+  {
+    "id": "case-converter",
+    "name": "Case Converter",
+    "slug": "case-converter",
+    "description": "Convert text case between UPPERCASE, lowercase, Title Case, Sentence case, and camelCase.",
+    "keywords": ["case converter", "title case", "uppercase", "lowercase", "camelcase"]
+  },
+  {
+    "id": "remove-duplicates",
+    "name": "Remove Duplicate Lines",
+    "slug": "remove-duplicates",
+    "description": "Remove duplicate lines from lists or text blocks with trim and case sensitivity controls.",
+    "keywords": ["remove duplicate lines", "deduplicate", "remove duplicates", "clean list"]
+  },
+  {
+    "id": "json-formatter",
+    "name": "JSON Formatter & Validator",
+    "slug": "json-formatter",
+    "description": "Beautify, minify, and validate JSON strings with clear error indications.",
+    "keywords": ["json formatter", "json validator", "beautify json", "minify json"]
+  },
+  {
+    "id": "base64-encoder",
+    "name": "Base64 Encode/Decode",
+    "slug": "base64-encoder",
+    "description": "Encode plain text to Base64 format and decode Base64 back to readable text.",
+    "keywords": ["base64 encoder", "base64 decoder", "encode base64", "decode base64"]
+  },
+  {
+    "id": "find-and-replace",
+    "name": "Find and Replace Text",
+    "slug": "find-and-replace",
+    "description": "Find and replace text using exact matches or regular expressions with case-sensitivity toggles.",
+    "keywords": ["find and replace", "replace text", "regex replace", "text replacer"]
+  },
+  {
+    "id": "lorem-ipsum-generator",
+    "name": "Lorem Ipsum Generator",
+    "slug": "lorem-ipsum-generator",
+    "description": "Generate standard Lorem Ipsum placeholder text by words, sentences, or paragraphs.",
+    "keywords": ["lorem ipsum generator", "placeholder text", "dummy text", "ipsum generator"]
+  },
+  {
+    "id": "text-to-speech",
+    "name": "Text to Speech (TTS)",
+    "slug": "text-to-speech",
+    "description": "Convert text into spoken audio using browser speechSynthesis with voice selection.",
+    "keywords": ["text to speech", "tts online", "read text aloud", "audio voice generator"]
+  }
+]

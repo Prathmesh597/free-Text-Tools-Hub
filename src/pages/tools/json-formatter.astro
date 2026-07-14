@@ -1,0 +1,351 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online JSON Formatter & Validator - Beautify & Minify JSON"
+  description="Validate, format, and minify JSON strings. Our free JSON formatter provides descriptive syntax error checking and operations 100% locally."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Free Online JSON Formatter & Validator
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          JSON is the default format for API communication, configuration files, and data storage. However, raw JSON is often unreadable and syntax errors can break your applications. Use our free online JSON formatter to validate, beautify, and minify your JSON data payloads instantly.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="json-formatter-top" format="horizontal" />
+
+      <!-- JSON Formatter Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Error Alert (hidden by default) -->
+        <div id="error-alert" class="hidden bg-white border-l-4 border-error p-4 rounded-md shadow-sm">
+          <div class="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-error mt-0.5 animate-pulse">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <div>
+              <span class="block text-sm font-semibold text-ink">Invalid JSON Syntax</span>
+              <span id="error-msg" class="block text-xs text-body mt-1 font-mono bg-canvasSoft p-2 border border-hairline rounded">Error details...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Alert (hidden by default) -->
+        <div id="success-alert" class="hidden bg-white border-l-4 border-success p-4 rounded-md shadow-sm">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-success">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-semibold text-ink">Valid JSON Syntax</span>
+          </div>
+        </div>
+
+        <!-- Inputs / Double Textareas Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Input block -->
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between items-center">
+              <label for="json-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+                Input Raw JSON
+              </label>
+              <button
+                type="button"
+                id="load-sample-btn"
+                class="text-xs text-text-link hover:underline font-semibold cursor-pointer"
+              >
+                Insert Sample JSON
+              </button>
+            </div>
+            <textarea
+              id="json-input"
+              class="w-full min-h-[300px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-mono text-[13px] text-ink placeholder:text-mutedSoft transition-all"
+              placeholder='Paste raw JSON here, e.g.\n{\n  "status": "active",\n  "count": 5\n}'
+            ></textarea>
+          </div>
+          
+          <!-- Output block -->
+          <div class="flex flex-col gap-2">
+            <label for="json-output" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Output Result
+            </label>
+            <textarea
+              id="json-output"
+              readonly
+              class="w-full min-h-[300px] p-4 bg-canvasSoft border border-hairlineStrong rounded-md focus:outline-none font-mono text-[13px] text-ink placeholder:text-mutedSoft transition-all resize-y"
+              placeholder="Formatted or minified JSON will appear here..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              id="format-btn"
+              class="h-10 px-5 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Format (Beautify)
+            </button>
+            <button
+              type="button"
+              id="minify-btn"
+              class="h-10 px-5 border border-hairlineStrong hover:bg-surfaceStrong text-ink font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all"
+            >
+              Minify
+            </button>
+            <button
+              type="button"
+              id="validate-btn"
+              class="h-10 px-5 border border-hairlineStrong hover:bg-surfaceStrong text-ink font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all"
+            >
+              Validate
+            </button>
+            <CopyButton targetId="json-output" class="hidden" id="copy-btn-wrapper" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="json-formatter-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What causes an "Invalid JSON Syntax" error?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Common JSON syntax errors include using single quotes instead of double quotes for strings, forgetting commas between properties, trailing commas at the end of objects/arrays, or failing to close brackets. Our validator identifies these syntax errors immediately.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is the difference between beautified and minified JSON?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Beautified (formatted) JSON includes indentation (we use 2 spaces) and line breaks to make it easy for humans to read. Minified JSON removes all unnecessary spacing, indentation, and newlines to compress the data size, which is ideal for reducing bandwith consumption in APIs.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Does this JSON formatter validate nested payloads?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Yes, our tool recursively parses and validates nested JSON structures, objects, and arrays. If there is a parse failure at any nesting depth, it catches the error and surfaces it.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Is it secure to paste confidential JSON data here?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Absolutely. Our tools are client-side only. All formatting and validation execution happens inside your browser sandbox. None of your data is sent to external API endpoints or analytics servers, making it safe for corporate and API payloads.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="json-formatter-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { formatJSON, minifyJSON, validateJSON } from '../../lib/jsonProcessing';
+
+  const inputEl = document.getElementById('json-input') as HTMLTextAreaElement | null;
+  const outputEl = document.getElementById('json-output') as HTMLTextAreaElement | null;
+  
+  const formatBtn = document.getElementById('format-btn');
+  const minifyBtn = document.getElementById('minify-btn');
+  const validateBtn = document.getElementById('validate-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const loadSampleBtn = document.getElementById('load-sample-btn');
+  
+  const errorAlert = document.getElementById('error-alert');
+  const errorMsg = document.getElementById('error-msg');
+  const successAlert = document.getElementById('success-alert');
+  const copyBtnWrapper = document.getElementById('copy-btn-wrapper');
+
+  if (loadSampleBtn && inputEl) {
+    loadSampleBtn.addEventListener('click', () => {
+      const sampleJSON = {
+        "status": "success",
+        "message": "Sample JSON payload parsed locally",
+        "data": {
+          "user": {
+            "id": 1042,
+            "username": "developer_expo",
+            "email": "developer@expo.dev",
+            "active": true,
+            "roles": ["administrator", "developer"]
+          },
+          "system": {
+            "nodeVersion": "v24.15.0",
+            "environment": "edge-synthesis",
+            "features": {
+              "minify": true,
+              "beautify": true,
+              "validate": true
+            }
+          }
+        }
+      };
+      inputEl.value = JSON.stringify(sampleJSON, null, 2);
+      clearAlerts();
+      if (outputEl) outputEl.value = '';
+      if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      inputEl.focus();
+    });
+  }
+
+  function clearAlerts() {
+    if (errorAlert) errorAlert.classList.add('hidden');
+    if (successAlert) successAlert.classList.add('hidden');
+  }
+
+  function showSuccess() {
+    clearAlerts();
+    if (successAlert) successAlert.classList.remove('hidden');
+  }
+
+  function showError(msg: string) {
+    clearAlerts();
+    if (errorAlert && errorMsg) {
+      errorMsg.textContent = msg;
+      errorAlert.classList.remove('hidden');
+    }
+  }
+
+  if (formatBtn) {
+    formatBtn.addEventListener('click', () => {
+      if (!inputEl || !outputEl) return;
+      const text = inputEl.value;
+      if (!text.trim()) return;
+
+      const result = formatJSON(text);
+      if (result.isValid) {
+        outputEl.value = result.formattedText;
+        showSuccess();
+        if (copyBtnWrapper) copyBtnWrapper.classList.remove('hidden');
+      } else {
+        outputEl.value = '';
+        showError(result.error || 'Failed to parse JSON.');
+        if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      }
+    });
+  }
+
+  if (minifyBtn) {
+    minifyBtn.addEventListener('click', () => {
+      if (!inputEl || !outputEl) return;
+      const text = inputEl.value;
+      if (!text.trim()) return;
+
+      const result = minifyJSON(text);
+      if (result.isValid) {
+        outputEl.value = result.formattedText;
+        showSuccess();
+        if (copyBtnWrapper) copyBtnWrapper.classList.remove('hidden');
+      } else {
+        outputEl.value = '';
+        showError(result.error || 'Failed to parse JSON.');
+        if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      }
+    });
+  }
+
+  if (validateBtn) {
+    validateBtn.addEventListener('click', () => {
+      if (!inputEl) return;
+      const text = inputEl.value;
+      if (!text.trim()) return;
+
+      const result = validateJSON(text);
+      if (result.isValid) {
+        showSuccess();
+      } else {
+        showError(result.error || 'Failed to parse JSON.');
+      }
+    });
+  }
+
+  if (clearBtn && inputEl && outputEl) {
+    clearBtn.addEventListener('click', () => {
+      inputEl.value = '';
+      outputEl.value = '';
+      clearAlerts();
+      if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      inputEl.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What causes an 'Invalid JSON Syntax' error?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common syntax errors are single quotes for strings, forgetting commas, trailing commas, or missing brackets/braces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between beautified and minified JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Beautified JSON includes line breaks and indents for human readability. Minified JSON strips whitespaces to compress size for network transportation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this JSON formatter validate nested payloads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The validator recursively tests the string layout and outputs exact error positions on parsing failures."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it secure to paste confidential JSON data here?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, operations run locally in your web browser. No data is stored, shared, or sent over internet connections."
+        }
+      }
+    ]
+  }
+</script>

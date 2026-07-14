@@ -1,0 +1,256 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Case Converter - UPPERCASE, lowercase, Title Case, Sentence Case"
+  description="Easily convert text between UPPERCASE, lowercase, Title Case, Sentence case, and camelCase. Our free online case converter operates locally in your browser."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Free Online Case Converter
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Accidentally left Caps Lock on? Need to format headings for your essay in Title Case? Or writing code that requires camelCase parameters? Our free online case converter tool lets you transform any text block into your desired format instantly. Simply paste your text below and click the corresponding transformation button.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="case-converter-top" format="horizontal" />
+
+      <!-- Case Converter Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Textarea input -->
+        <div class="flex flex-col gap-2">
+          <label for="case-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+            Enter or Paste Your Text
+          </label>
+          <textarea
+            id="case-input"
+            class="w-full min-h-[250px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-base text-ink placeholder:text-mutedSoft transition-all"
+            placeholder="Type or paste your text here to convert..."
+          ></textarea>
+        </div>
+
+        <!-- Case Transformation Buttons Grid -->
+        <div class="flex flex-wrap gap-3">
+          <button
+            type="button"
+            data-transform="uppercase"
+            class="h-10 px-4 bg-primary hover:bg-primaryActive text-onPrimary font-medium text-xs rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+          >
+            UPPERCASE
+          </button>
+          <button
+            type="button"
+            data-transform="lowercase"
+            class="h-10 px-4 bg-primary hover:bg-primaryActive text-onPrimary font-medium text-xs rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+          >
+            lowercase
+          </button>
+          <button
+            type="button"
+            data-transform="titlecase"
+            class="h-10 px-4 bg-primary hover:bg-primaryActive text-onPrimary font-medium text-xs rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+          >
+            Title Case
+          </button>
+          <button
+            type="button"
+            data-transform="sentencecase"
+            class="h-10 px-4 bg-primary hover:bg-primaryActive text-onPrimary font-medium text-xs rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+          >
+            Sentence case
+          </button>
+          <button
+            type="button"
+            data-transform="camelcase"
+            class="h-10 px-4 bg-primary hover:bg-primaryActive text-onPrimary font-medium text-xs rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+          >
+            camelCase
+          </button>
+        </div>
+
+        <!-- Action Buttons (Copy/Clear) -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <CopyButton targetId="case-input" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear Text
+            </button>
+          </div>
+          <div class="text-xs text-muted font-mono" id="char-count-display">
+            0 characters
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="case-converter-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What does Sentence case do?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Sentence case takes your text, converts it all to lowercase, and then capitalizes the first letter of each sentence (e.g. after a period, exclamation point, or question mark followed by a space). This is useful for formatting copy-pasted blocks of text into standard readable writing.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is Title Case?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Title Case capitalizes the first letter of every word. It is commonly used for headings, titles of articles, books, and marketing headlines to give them a structured and formal appearance.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Why would I use camelCase?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              camelCase is a style of writing where words are joined together without spaces, with each subsequent word beginning with a capitalized letter (e.g. `thisIsCamelCase`). It is widely used by software developers for naming variables, functions, and files in programming languages like JavaScript.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Does this case converter store my text?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              No. Just like all tools on Text Tools Hub, the conversion happens directly inside your web browser. No data is sent to external servers, protecting your private documents, code snippets, or notes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="case-converter-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { toUppercase, toLowercase, toTitleCase, toSentenceCase, toCamelCase } from '../../lib/textProcessing';
+
+  const caseInput = document.getElementById('case-input') as HTMLTextAreaElement | null;
+  const clearBtn = document.getElementById('clear-btn') as HTMLButtonElement | null;
+  const charDisplay = document.getElementById('char-count-display');
+
+  // Find all buttons with data-transform
+  const transformButtons = document.querySelectorAll('[data-transform]');
+
+  function updateCharCount() {
+    if (!caseInput || !charDisplay) return;
+    const len = caseInput.value.length;
+    charDisplay.textContent = `${len.toLocaleString()} character${len === 1 ? '' : 's'}`;
+  }
+
+  transformButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (!caseInput) return;
+      const originalText = caseInput.value;
+      if (!originalText) return;
+
+      const type = button.getAttribute('data-transform');
+      let transformed = originalText;
+
+      switch (type) {
+        case 'uppercase':
+          transformed = toUppercase(originalText);
+          break;
+        case 'lowercase':
+          transformed = toLowercase(originalText);
+          break;
+        case 'titlecase':
+          transformed = toTitleCase(originalText);
+          break;
+        case 'sentencecase':
+          transformed = toSentenceCase(originalText);
+          break;
+        case 'camelcase':
+          transformed = toCamelCase(originalText);
+          break;
+      }
+
+      caseInput.value = transformed;
+      updateCharCount();
+      caseInput.focus();
+    });
+  });
+
+  if (caseInput) {
+    caseInput.addEventListener('input', updateCharCount);
+    updateCharCount();
+  }
+
+  if (clearBtn && caseInput) {
+    clearBtn.addEventListener('click', () => {
+      caseInput.value = '';
+      updateCharCount();
+      caseInput.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Sentence case do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sentence case takes your text, converts it all to lowercase, and then capitalizes the first letter of each sentence."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Title Case?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Title Case capitalizes the first letter of every word. It is commonly used for headings, article titles, and marketing headers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why would I use camelCase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "camelCase joins words together without spaces, with subsequent words beginning with a capitalized letter. It is widely used in computer programming."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this case converter store my text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Just like all tools on Text Tools Hub, the conversion happens directly inside your web browser. No data is sent to external servers."
+        }
+      }
+    ]
+  }
+</script>

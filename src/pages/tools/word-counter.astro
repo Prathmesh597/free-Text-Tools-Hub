@@ -1,0 +1,219 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Free Online Word Counter - Count Words, Characters & Reading Time"
+  description="Need to count words for an essay or blog post? Our free word counter tool instantly calculates words, characters, sentences, and reading time in real-time. 100% private."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Free Online Word Counter
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Whether you are writing an essay, a blog article, a social media post, or a book chapter, keeping track of your word and character count is vital. Our free online word counter tool offers a clean, distraction-free environment to write, paste, and analyze your text. It operates 100% locally in your browser, ensuring your private drafts never leave your device.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="word-counter-top" format="horizontal" />
+
+      <!-- Word Counter Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Textarea input -->
+        <div class="flex flex-col gap-2">
+          <label for="word-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+            Enter or Paste Your Text
+          </label>
+          <textarea
+            id="word-input"
+            class="w-full min-h-[250px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-base text-ink placeholder:text-mutedSoft transition-all"
+            placeholder="Start typing or paste your text here..."
+          ></textarea>
+        </div>
+
+        <!-- Metric Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <div class="bg-canvasSoft border border-hairline rounded-lg p-4 text-center">
+            <span id="metric-words" class="block text-3xl font-semibold tracking-tight text-ink">0</span>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-muted mt-1 block">Words</span>
+          </div>
+          <div class="bg-canvasSoft border border-hairline rounded-lg p-4 text-center">
+            <span id="metric-chars" class="block text-3xl font-semibold tracking-tight text-ink">0</span>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-muted mt-1 block">Characters</span>
+          </div>
+          <div class="bg-canvasSoft border border-hairline rounded-lg p-4 text-center">
+            <span id="metric-chars-no-space" class="block text-3xl font-semibold tracking-tight text-ink">0</span>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-muted mt-1 block">No Spaces</span>
+          </div>
+          <div class="bg-canvasSoft border border-hairline rounded-lg p-4 text-center">
+            <span id="metric-sentences" class="block text-3xl font-semibold tracking-tight text-ink">0</span>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-muted mt-1 block">Sentences</span>
+          </div>
+          <div class="bg-canvasSoft border border-hairline rounded-lg p-4 text-center">
+            <span id="metric-reading-time" class="block text-3xl font-semibold tracking-tight text-ink">0 min</span>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-muted mt-1 block">Read Time</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <CopyButton targetId="word-input" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear Text
+            </button>
+          </div>
+          <div class="text-xs text-muted font-mono" id="paragraph-count-display">
+            0 paragraphs
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Below Tool) -->
+      <AdSlot slotId="word-counter-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">How does the reading time calculator work?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              We calculate reading time based on an average reading speed of 200 words per minute (WPM). This is the standard reading rate for adults reading educational or general web content. If your document has 600 words, it will take about 3 minutes to read.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Is my data safe using this word counter?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Yes, absolutely. Unlike other online word counters that upload your text to their servers for processing, Text Tools Hub does everything locally in your browser. No internet requests are sent with your input text, keeping your content 100% private.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Does this counter count spaces as characters?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Yes, the standard "Characters" metric counts every keystroke including spaces, tabs, and paragraph line breaks. However, we also provide a separate "No Spaces" metric which ignores whitespace so you can match stricter requirements.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is the difference between word count and character count?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Word count counts whole words separated by whitespace. Character count measures every individual letter, number, punctuation mark, and space. Academic assignments usually specify word count, while Twitter or text messaging platforms enforce character count limits.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="word-counter-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { calculateWordMetrics } from '../../lib/textProcessing';
+
+  const wordInput = document.getElementById('word-input') as HTMLTextAreaElement | null;
+  const clearBtn = document.getElementById('clear-btn') as HTMLButtonElement | null;
+
+  // Metric outputs
+  const wordsEl = document.getElementById('metric-words');
+  const charsEl = document.getElementById('metric-chars');
+  const charsNoSpaceEl = document.getElementById('metric-chars-no-space');
+  const sentencesEl = document.getElementById('metric-sentences');
+  const readingTimeEl = document.getElementById('metric-reading-time');
+  const paragraphCountEl = document.getElementById('paragraph-count-display');
+
+  function updateMetrics() {
+    if (!wordInput) return;
+    const text = wordInput.value;
+    const metrics = calculateWordMetrics(text);
+
+    if (wordsEl) wordsEl.textContent = metrics.words.toLocaleString();
+    if (charsEl) charsEl.textContent = metrics.characters.toLocaleString();
+    if (charsNoSpaceEl) charsNoSpaceEl.textContent = metrics.charactersNoSpaces.toLocaleString();
+    if (sentencesEl) sentencesEl.textContent = metrics.sentences.toLocaleString();
+    if (readingTimeEl) readingTimeEl.textContent = `${metrics.readingTime} min`;
+    if (paragraphCountEl) paragraphCountEl.textContent = `${metrics.paragraphs} paragraph${metrics.paragraphs === 1 ? '' : 's'}`;
+  }
+
+  if (wordInput) {
+    wordInput.addEventListener('input', updateMetrics);
+    updateMetrics();
+  }
+
+  if (clearBtn && wordInput) {
+    clearBtn.addEventListener('click', () => {
+      wordInput.value = '';
+      updateMetrics();
+      wordInput.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the reading time calculator work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We calculate reading time based on an average reading speed of 200 words per minute (WPM). This is the standard reading rate for adults reading educational or general web content."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe using this word counter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, absolutely. Unlike other online word counters that upload your text to their servers for processing, Text Tools Hub does everything locally in your browser. No internet requests are sent with your input text, keeping your content 100% private."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this counter count spaces as characters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the standard 'Characters' metric counts every keystroke including spaces, tabs, and paragraph line breaks. However, we also provide a separate 'No Spaces' metric which ignores whitespace."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between word count and character count?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Word count counts whole words separated by whitespace. Character count measures every individual letter, number, punctuation mark, and space."
+        }
+      }
+    ]
+  }
+</script>

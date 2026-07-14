@@ -1,0 +1,191 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import tools from '../data/tools.json';
+import AdSlot from '../components/layout/AdSlot.astro';
+import ToolIcon from '../components/ui/ToolIcon.astro';
+---
+
+<MainLayout
+  title="Text Tools Hub - Free, Local Client-Side Text Utility Suite"
+  description="Validate JSON, count words, convert cases, deduplicate lists, encode/decode Base64, and run Text-to-Speech. 100% private in-browser utilities."
+>
+  <!-- Hero Section -->
+  <div class="text-center max-w-3xl mx-auto mb-16 relative pt-6">
+    <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit mx-auto">
+      Browser Tools
+    </span>
+    <h1 class="text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-ink mt-4 mb-6 tracking-tight leading-[1.05] font-display">
+      Free Online Text Tools
+    </h1>
+    
+    <p class="text-base text-body leading-relaxed mb-8 font-normal">
+      Text Tools Hub is a curated collection of lightweight, instant-utility text manipulation tools. Everything operates <strong class="text-ink font-semibold">100% client-side</strong> inside your browser. Your data is never transmitted, stored, or processed on any server, ensuring absolute privacy and zero latency.
+    </p>
+
+    <!-- Search/Filter Input -->
+    <div class="relative max-w-md mx-auto">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search for a tool (e.g. JSON, word count)..."
+        class="w-full h-11 pl-11 pr-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink text-sm text-ink placeholder:text-muted transition-all shadow-sm"
+      />
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4.5 h-4.5 text-muted absolute left-4 top-3.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Top Banner Ad -->
+  <AdSlot slotId="homepage-top" format="horizontal" class="mb-12" />
+
+  <!-- Tool Grid Section -->
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center justify-between border-b border-hairline pb-4 mb-2">
+      <h2 class="text-lg font-semibold text-ink font-display tracking-tight">Interactive Utilities</h2>
+      <span id="tools-count" class="text-xs font-semibold tracking-wider text-muted uppercase bg-surfaceStrong px-2.5 py-1 rounded-md">
+        {tools.length} Tools Available
+      </span>
+    </div>
+
+    <!-- Grid Layout -->
+    <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {tools.map(tool => (
+        <a
+          href={`/tools/${tool.slug}`}
+          data-keywords={tool.keywords.join(',')}
+          data-name={tool.name.toLowerCase()}
+          data-desc={tool.description.toLowerCase()}
+          class="tool-card group block bg-surfaceCard border border-hairline rounded-lg p-6 hover:shadow-lg card-shadow-hover transition-all"
+        >
+          <div class="flex items-start gap-4">
+            <span class="p-3 bg-canvasSoft border border-hairline rounded-md group-hover:scale-105 transition-transform duration-200 text-ink block">
+              <ToolIcon slug={tool.slug} class="w-6 h-6" />
+            </span>
+            <div class="flex-grow">
+              <h3 class="text-sm font-semibold text-ink group-hover:text-text-link transition-colors flex items-center gap-1.5 font-display">
+                {tool.name}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-text-link">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </h3>
+              <p class="text-xs text-body leading-relaxed mt-2 font-normal">
+                {tool.description}
+              </p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Empty search state -->
+    <div id="empty-state" class="hidden text-center py-16 bg-surfaceCard border border-hairline rounded-lg select-none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mx-auto text-muted mb-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
+      </svg>
+      <h3 class="text-base font-semibold text-ink mt-4">No tools matches found</h3>
+      <p class="text-xs text-muted mt-1">Try searching for other terms like "case", "json", "base64", or "counter".</p>
+    </div>
+  </div>
+
+  <!-- Bottom Banner Ad -->
+  <AdSlot slotId="homepage-bottom" format="horizontal" class="mt-12" />
+
+  <!-- Educational Article / SEO Section -->
+  <div class="prose prose-stone max-w-none mt-20 border-t border-hairline pt-16 flex flex-col gap-12">
+    <div class="grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="text-2xl font-semibold text-ink mb-4 font-display tracking-tight">Why local browser-based text tools are superior</h2>
+        <p class="text-xs text-body leading-relaxed">
+          Traditional text utility websites function by receiving your inputted text drafts on their servers, running the formatting backend script, and sending the results back over the internet. This model presents two massive drawbacks: latency and privacy concerns.
+        </p>
+        <p class="text-xs text-body leading-relaxed mt-4">
+          By utilizing modern client-side scripting frameworks like Astro and vanilla ES6 JavaScript, Text Tools Hub shifts 100% of the computational work directly into your browser. This means operations occur instantaneously without any network requests. More importantly, it keeps your private logs, essays, credentials, and configuration scripts safely on your computer.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold text-ink mb-4 font-display tracking-tight">A complete suite built for writers, developers, and designers</h2>
+        <p class="text-xs text-body leading-relaxed">
+          Text Tools Hub packages all essential operations into a cohesive visual language:
+        </p>
+        <ul class="text-xs text-body leading-relaxed mt-4 list-disc pl-5 flex flex-col gap-2.5">
+          <li><strong class="text-ink font-semibold">Developer Utils:</strong> Validate, minify, and beautify raw JSON; encode and decode safe UTF-8 Base64 strings.</li>
+          <li><strong class="text-ink font-semibold">Content Writers:</strong> Keep tab on word density, character counts, paragraph metrics, and estimated reading time. Convert case syntax into Title Case or camelCase instantly.</li>
+          <li><strong class="text-ink font-semibold">Graphic Designers:</strong> Generate custom Lorem Ipsum dummy paragraphs to populate visual wireframes and website templates.</li>
+          <li><strong class="text-ink font-semibold">Audio Voiceovers:</strong> Synthesize script voiceovers directly from browser engines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Guides Section -->
+    <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8">
+      <h3 class="text-sm font-semibold text-ink mb-6 uppercase tracking-wider">Guides & Articles</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] font-semibold tracking-wider text-muted uppercase">Tutorial</span>
+          <h4 class="text-sm font-semibold text-ink">How to Format JSON for APIs</h4>
+          <p class="text-xs text-body leading-relaxed">
+            API interfaces expect JSON objects formatted under strict rules. Learn how to validate structures, escape keys, and minify payloads to cut network data usage.
+          </p>
+          <a href="/tools/json-formatter" class="text-xs text-text-link hover:underline font-semibold mt-2 block w-fit">Format JSON &rarr;</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] font-semibold tracking-wider text-muted uppercase">SEO Tips</span>
+          <h4 class="text-sm font-semibold text-ink">Why Reading Time Matters for Blogs</h4>
+          <p class="text-xs text-body leading-relaxed">
+            Adding estimated reading times to blog posts increases reader engagement and lowers bounce rates. Learn how to calculate reading speeds.
+          </p>
+          <a href="/tools/word-counter" class="text-xs text-text-link hover:underline font-semibold mt-2 block w-fit">Count Words &rarr;</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] font-semibold tracking-wider text-muted uppercase">Grammar</span>
+          <h4 class="text-sm font-semibold text-ink">Difference between Title Case and Sentence Case</h4>
+          <p class="text-xs text-body leading-relaxed">
+            Formatting titles properly increases copywriting click-through-rates. Learn when to use Title Case capitalization vs standard Sentence layout rules.
+          </p>
+          <a href="/tools/case-converter" class="text-xs text-text-link hover:underline font-semibold mt-2 block w-fit">Convert Cases &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+  const cards = document.querySelectorAll('.tool-card');
+  const emptyState = document.getElementById('empty-state');
+  const toolsCount = document.getElementById('tools-count');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name') || '';
+        const desc = card.getAttribute('data-desc') || '';
+        const keywords = card.getAttribute('data-keywords') || '';
+
+        if (name.includes(q) || desc.includes(q) || keywords.includes(q)) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (toolsCount) {
+        toolsCount.textContent = q ? `${visibleCount} Match${visibleCount === 1 ? '' : 'es'}` : `${cards.length} Tools Available`;
+      }
+
+      if (emptyState) {
+        if (visibleCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>

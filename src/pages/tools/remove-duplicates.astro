@@ -1,0 +1,251 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CopyButton from '../../components/ui/CopyButton.astro';
+import AdSlot from '../../components/layout/AdSlot.astro';
+---
+
+<MainLayout
+  title="Remove Duplicate Lines - Free Online Deduplication Tool"
+  description="Deduplicate lists or text blocks in seconds. Clean lists by removing duplicate lines, with toggles for trim whitespace and case-sensitivity."
+>
+  <!-- Layout Grid: Main Content vs Sidebar Ad -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left / Main Column (Tool) -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- H1 Page Title & Intro -->
+      <div class="flex flex-col gap-2">
+        <span class="bg-surfaceStrong text-ink text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full w-fit">
+          Utility Tool
+        </span>
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink mt-2 mb-3 leading-tight font-display">
+          Remove Duplicate Lines
+        </h1>
+        <p class="text-sm text-body leading-relaxed max-w-3xl">
+          Cleaning lists, datasets, email addresses, or code blocks can be tedious. Our free online list deduplication tool extracts unique lines from any text payload instantly. Choose whether to ignore leading/trailing whitespace, perform case-sensitive filtering, and copy the clean output back to your clipboard in a single click.
+        </p>
+      </div>
+
+      <!-- In-Content Ad (Top) -->
+      <AdSlot slotId="remove-duplicates-top" format="horizontal" />
+
+      <!-- Deduplication Card -->
+      <div class="bg-surfaceCard border border-hairline rounded-lg p-6 md:p-8 flex flex-col gap-6 shadow-sm">
+        
+        <!-- Inputs / Double Textareas Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Input block -->
+          <div class="flex flex-col gap-2">
+            <label for="duplicate-input" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Input Text (Original List)
+            </label>
+            <textarea
+              id="duplicate-input"
+              class="w-full min-h-[220px] p-4 bg-surfaceCard border border-hairlineStrong rounded-md focus:outline-none focus:border-2 focus:border-ink resize-y font-body text-sm text-ink placeholder:text-mutedSoft transition-all"
+              placeholder="Paste your lines of text here (one item per line)..."
+            ></textarea>
+          </div>
+          
+          <!-- Output block -->
+          <div class="flex flex-col gap-2">
+            <label for="duplicate-output" class="text-xs font-semibold tracking-wider uppercase text-muted">
+              Output Text (Deduplicated List)
+            </label>
+            <textarea
+              id="duplicate-output"
+              readonly
+              class="w-full min-h-[220px] p-4 bg-canvasSoft border border-hairlineStrong rounded-md focus:outline-none font-body text-sm text-ink placeholder:text-mutedSoft transition-all resize-y"
+              placeholder="Cleaned unique lines will appear here..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Toggles / Configurations -->
+        <div class="flex flex-wrap gap-6 items-center">
+          <label class="inline-flex items-center gap-2.5 cursor-pointer text-sm text-ink select-none">
+            <input
+              type="checkbox"
+              id="toggle-trim"
+              checked
+              class="w-4 h-4 rounded border-hairlineStrong text-primary focus:ring-0 cursor-pointer accent-primary"
+            />
+            Trim whitespace before comparing
+          </label>
+          <label class="inline-flex items-center gap-2.5 cursor-pointer text-sm text-ink select-none">
+            <input
+              type="checkbox"
+              id="toggle-case"
+              class="w-4 h-4 rounded border-hairlineStrong text-primary focus:ring-0 cursor-pointer accent-primary"
+            />
+            Case-sensitive comparison
+          </label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              id="process-btn"
+              class="h-10 px-5 bg-primary hover:bg-primaryActive text-white font-medium text-sm rounded-md cursor-pointer active:scale-98 transition-all shadow-sm"
+            >
+              Remove Duplicates
+            </button>
+            <CopyButton targetId="duplicate-output" class="hidden" id="copy-btn-wrapper" />
+            <button
+              type="button"
+              id="clear-btn"
+              class="h-10 px-[18px] border border-hairlineStrong hover:bg-surfaceStrong active:scale-98 text-ink font-medium text-sm rounded-md cursor-pointer transition-all"
+            >
+              Clear
+            </button>
+          </div>
+          <div id="removed-msg" class="text-sm font-semibold text-success hidden">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In-Content Ad (Bottom) -->
+      <AdSlot slotId="remove-duplicates-bottom" format="horizontal" />
+
+      <!-- FAQ Section (Outro) -->
+      <div class="prose prose-stone max-w-none mt-6 flex flex-col gap-6">
+        <h2 class="text-2xl font-semibold text-ink font-display tracking-tight">Frequently Asked Questions</h2>
+        
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is the "Trim whitespace" option?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              When checked, this option removes any leading spaces, trailing spaces, or tab gaps from each line of text before deciding if it is a duplicate. This ensures that `item` and `  item  ` are treated as the same line.
+            </p>
+          </div>
+          
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">What is case-sensitive comparison?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              By default, we compare lines case-insensitively, meaning `Apple` and `apple` are considered duplicates, and only the first occurrence is kept. Enabling "Case-sensitive comparison" treats them as distinct lines.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Are empty lines kept in the output?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Empty lines are treated as valid text content. If you paste multiple empty lines, only the first empty line is kept as a unique entry, and all subsequent empty lines are removed.
+            </p>
+          </div>
+
+          <div class="bg-surfaceCard border border-hairline rounded-lg p-5">
+            <h3 class="text-base font-semibold text-ink mb-2">Can I process large files using this tool?</h3>
+            <p class="text-xs text-body leading-relaxed">
+              Yes, our deduplication function is optimized to handle lists containing thousands of lines. Because all processing is handled locally by the browser, operations complete almost instantaneously.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Sidebar Ad) -->
+    <div class="lg:col-span-3 lg:sticky lg:top-24 flex flex-col gap-6">
+      <AdSlot slotId="remove-duplicates-sidebar" format="vertical" class="min-h-[250px] lg:min-h-[500px]" />
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  import { removeDuplicateLines } from '../../lib/textProcessing';
+
+  const inputEl = document.getElementById('duplicate-input') as HTMLTextAreaElement | null;
+  const outputEl = document.getElementById('duplicate-output') as HTMLTextAreaElement | null;
+  const processBtn = document.getElementById('process-btn') as HTMLButtonElement | null;
+  const clearBtn = document.getElementById('clear-btn') as HTMLButtonElement | null;
+  const toggleTrim = document.getElementById('toggle-trim') as HTMLInputElement | null;
+  const toggleCase = document.getElementById('toggle-case') as HTMLInputElement | null;
+  const removedMsg = document.getElementById('removed-msg');
+  const copyBtnWrapper = document.getElementById('copy-btn-wrapper');
+
+  function handleProcess() {
+    if (!inputEl || !outputEl) return;
+    const text = inputEl.value;
+    if (!text.trim()) {
+      outputEl.value = '';
+      if (removedMsg) removedMsg.classList.add('hidden');
+      if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      return;
+    }
+
+    const trim = toggleTrim ? toggleTrim.checked : false;
+    const caseSensitive = toggleCase ? toggleCase.checked : false;
+
+    const result = removeDuplicateLines(text, caseSensitive, trim);
+    outputEl.value = result.cleanedText;
+
+    if (removedMsg) {
+      removedMsg.textContent = `Removed ${result.removedCount.toLocaleString()} duplicate line${result.removedCount === 1 ? '' : 's'}.`;
+      removedMsg.classList.remove('hidden');
+    }
+
+    if (copyBtnWrapper) {
+      copyBtnWrapper.classList.remove('hidden');
+    }
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', handleProcess);
+  }
+
+  if (clearBtn && inputEl && outputEl) {
+    clearBtn.addEventListener('click', () => {
+      inputEl.value = '';
+      outputEl.value = '';
+      if (removedMsg) removedMsg.classList.add('hidden');
+      if (copyBtnWrapper) copyBtnWrapper.classList.add('hidden');
+      inputEl.focus();
+    });
+  }
+</script>
+
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the 'Trim whitespace' option?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When checked, this option removes leading and trailing spaces from each line before comparison. This ensures strings with spacing mismatches are matched correctly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is case-sensitive comparison?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Case-sensitive comparison treats lines with identical words but different casing (e.g. 'Apple' vs 'apple') as separate lines. Disabling it matches them together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are empty lines kept in the output?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only the first empty line is kept as a unique entry; all subsequent empty lines are removed as duplicates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I process large files using this tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our client-side deduplication processes thousands of rows instantly in the browser without server latency or privacy issues."
+        }
+      }
+    ]
+  }
+</script>
